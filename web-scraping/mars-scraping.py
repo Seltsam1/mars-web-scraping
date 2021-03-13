@@ -10,24 +10,55 @@ import pandas as pd
 from splinter import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 
+##################################
+### Functions ###
+##################################
 
-# Executable path
+# Function to execute scraping code and return data as a dictionary
 
-executable_path = {"executable_path": ChromeDriverManager().install()}
-browser = Browser('chrome', **executable_path, headless=False)
+def scrape_all():
+
+    # Executable path
+    executable_path = {"executable_path": ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=False)
+
+    # call mars_news function
+    mars_news(browser)
+
+    # call featured function
+    # featured(browser)
 
 
 ### NASA website ###
+def mars_news(browser):
+
+    # Url to be scraped (NASA Mars News Site)
+    url = "https://mars.nasa.gov/news/"
+
+    # Direct browser to nasa page
+    browser.visit(url)
+
+    # Save html from browser to variable
+    html = browser.html
+
+    # Create Beautiful soup object and parse
+    soup = bs(html, "html.parser")
+
+    # Retrieve results for most recent title (top most article)
+    results = soup.select_one("ul.item_list li.slide")
+    
+    return None
+
+def featured(browser):
+    return None
+
+def mars_fact():
+    return None
+
+def hemisphere():
+    return None
 
 
-# Url to be scraped (NASA Mars News Site)
-url = "https://mars.nasa.gov/news/"
-
-# Direct browser to nasa page
-browser.visit(url)
-
-# Save html from browser to variable
-html = browser.html
 
 # Create Beautiful soup object and parse
 soup = bs(html, "html.parser")
