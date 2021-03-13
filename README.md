@@ -14,7 +14,7 @@ This project will scrape 4 websites for data and images about Mars and use the r
   - The jupyter notebook file contains all prelimary code used in scraping the above websites and shows resulting values of variables
   - The first pyton file (marps_scraping.py) contains functions based on the code in the jupyter notebook to scrape the above websites
   - The second python file (app.py) will create a flask instance, store scraped data into a mongo database, and render the indext.html file
-  - The html file (located in templates folder)...
+  - The html file (located in templates folder) is the landing page for the Mars app
 
 ## Features
 
@@ -50,7 +50,10 @@ This project will scrape 4 websites for data and images about Mars and use the r
       - Renders data into the "index.htm" file
 
 - index.html
-  - TBD   
+  - Located in templates folder
+  - Contains landing page for Mars app
+  - Utilizes bootstrap css
+  - Includes a for loop to go through the hemisphere impages
 
 ## Licensing by:
 
