@@ -12,8 +12,9 @@ This project will scrape 4 websites for data and images about Mars and use the r
 
 - All necessary files are in the "web-scraping" folder
   - The jupyter notebook file contains all prelimary code used in scraping the above websites and shows resulting values of variables
-  - The first pythin file (marps_scraping.py) contains functions based on the code in the jupyter notebook to scrape the above websites
-  - The second pythong file (app.py)....
+  - The first pyton file (marps_scraping.py) contains functions based on the code in the jupyter notebook to scrape the above websites
+  - The second python file (app.py) will create a flask instance, store scraped data into a mongo database, and render the indext.html file
+  - The html file (located in templates folder)...
 
 ## Features
 
@@ -38,7 +39,18 @@ This project will scrape 4 websites for data and images about Mars and use the r
 
 - app.py
   - Uses flask and flask_pymongo
-  - 
+  - Imports the "scrape_all" function from the mars_scraping.py file
+  - Has two app routes:
+    - /scrape
+      - Calls the "scrape_all" function
+      - Stores the resulting data in a mongo database
+      - Redirects back to index page
+    - / (index)
+      - Uses data from the mongo database
+      - Renders data into the "index.htm" file
+
+- index.html
+  - TBD   
 
 ## Licensing by:
 
