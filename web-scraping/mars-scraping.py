@@ -1,6 +1,4 @@
-
 ### Scraping Steps for Mars App ###
-
 
 # Dependencies
 
@@ -22,8 +20,19 @@ def scrape_all():
     executable_path = {"executable_path": ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
-    # call mars_news function
-    mars_news(browser)
+    # call mars_news function and save in variables
+    news_title, news_paragraph = mars_news(browser)
+
+    data = {
+        "news_title": news_title,
+        "news_paragraph": news_paragraph
+    }
+
+    # Close browser
+    browser.quit()
+
+    # return data as dictionary
+    return data
 
     # call featured function
     # featured(browser)
@@ -44,10 +53,25 @@ def mars_news(browser):
     # Create Beautiful soup object and parse
     soup = bs(html, "html.parser")
 
-    # Retrieve results for most recent title (top most article)
-    results = soup.select_one("ul.item_list li.slide")
+    # Retrieve results for most recent title and paragraph description (top most article)
+    try:
+        results = soup.select_one("ul.item_list li.slide")
     
-    return None
+        # Save first title as title variable
+        title = results.find("div", class_="content_title").text
+
+        # Save first paragraph of article as paragraph variable
+        paragraph = results.find("div", class_="article_teaser_body").text
+
+        # Print results to console
+        print("Scraping of NASA website complete")
+
+    except:
+        print("No data found")
+        return None, None
+
+    return title, paragraph
+
 
 def featured(browser):
     return None
@@ -60,20 +84,7 @@ def hemisphere():
 
 
 
-# Create Beautiful soup object and parse
-soup = bs(html, "html.parser")
 
-# Retrieve results for most recent title (top most article)
-results = soup.select_one("ul.item_list li.slide")
-
-# Save first title as title variable
-title = results.find("div", class_="content_title").text
-
-# Save first paragraph of article as paragraph variable
-paragraph = results.find("div", class_="article_teaser_body").text
-
-# Print results to console
-print("Scraping of NASA website complete")
 
 
 ### JPL website ###
