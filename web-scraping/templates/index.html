@@ -16,11 +16,25 @@
 
     <!--Body-->
     <body>
+        <div class="container">
 
-    <div>
-        <h1>Mission to Mars</h1>
+            <div class="jombotron text-center">
+                <h1>Mission to Mars</h1>
+                <a class="btn btn-primary btn-lg" href="/scrape">Scrape New Data</a>
 
-    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Latest Mars News</h2>
+
+                    <!--app.py will render data into placeholder variables-->
+                    <h3>{{mars.news_title}}</h3>
+                    <p>{{mars.news_paragraph}}</p>
+                    <p></p>
+            </div>
+
+        </div>
 
     </body>
 
