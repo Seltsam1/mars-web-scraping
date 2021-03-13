@@ -16,6 +16,8 @@ This project will scrape 4 websites for data and images about Mars and use the r
   - The second python file (app.py) will create a flask instance, store scraped data into a mongo database, and render the indext.html file
   - The html file (located in templates folder) is the landing page for the Mars app
 
+- The "examples" folder includes pics (png files) of the final rendered layout of the Mars app
+
 ## Features
 
 - web-scraping.ipynb (Jupyter Notebook)
@@ -54,6 +56,13 @@ This project will scrape 4 websites for data and images about Mars and use the r
   - Contains landing page for Mars app
   - Utilizes bootstrap css
   - Includes a for loop to go through the hemisphere impages
+
+- example_full.png, example_bottom_half.png, example_top_half.png
+  - Located in the examples folder
+  - Pics to show the final rendered version (below is the "example_full")
+
+
+![Example of Mars App](https://github.com/Seltsam1/mars-web-scraping/blob/main/web-scraping/examples/example_full.png)
 
 ## Licensing by:
 
