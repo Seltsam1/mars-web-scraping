@@ -10,7 +10,6 @@ from flask_pymongo import PyMongo
 # From mars-scraping.py file
 import mars_scraping
 
-
 #################################################
 # Flask Setup
 #################################################
@@ -29,20 +28,24 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
 
 @app.route("/")
 def index():
-    return "TBD"
+    mars = mongo.db.mars.find_one()
+    return render_template("index.html", mars=mars)
 
 # Route for scraping websites
 @app.route("/scrape")
 def scrape():
 
-    # Create collection in mongo
+    # Create collection in mongo database
     mars = mongo.db.mars
     
     # Call scrape_all function from python file
     mars_data = mars_scraping.scrape_all()
 
-    return "Scrape is working"
+    # Insert data into mongo database
+    mars.update({}, mars_data, upsert=True)
 
+    # Redirect to index.html
+    return redirect("/", code=302)
 
 
 # To run applicaton
