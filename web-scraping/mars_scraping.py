@@ -27,6 +27,7 @@ def scrape_all():
         "news_title": news_title,
         "news_paragraph": news_paragraph,
         "featured_image": featured(browser),
+        "facts": mars_facts()
     }
 
     # Close browser
@@ -61,7 +62,7 @@ def mars_news(browser):
         # Save first paragraph of article as paragraph variable
         paragraph = results.find("div", class_="article_teaser_body").text
 
-        # Print results to console
+        # Print to console
         print("Scraping of NASA website complete")
 
     except:
@@ -102,37 +103,33 @@ def featured(browser):
     return featured
 
 
+### Space Facts website ###
+def mars_facts():
 
-# def mars_fact():
-#     return None
+    # Convert html with pandas
+    df = pd.read_html("https://space-facts.com/mars/")
+
+    # Select first dataframe in list
+    mars_df = df[0]
+
+    # Name columns
+    mars_df.columns=["Description", "Mars"]
+
+    # Set first column as index
+    mars_df.set_index("Description", inplace=True)
+
+    # Print to console
+    print("Scraping of Space Facts website complete")
+
+    return mars_df.to_html(classes="table table-striped")
+
 
 # def hemisphere():
 #     return None
 
 
 
-# ### Space Facts website ###
 
-
-# # Convert html with pandas
-# df = pd.read_html("https://space-facts.com/mars/")
-
-# # Select first dataframe in list
-# mars_df = df[0]
-
-# ### Cleaning dataframe
-
-# # Name columns
-# mars_df.columns=["Description", "Mars"]
-
-# # Set first column as index
-# mars_df.set_index("Description", inplace=True)
-
-# # Convert dataframe to html table
-# mars_table = mars_df.to_html()
-
-# # Print to console
-# print("Scraping of Space Facts website complete")
 
 
 # ### USGS Astrogeology website ###
