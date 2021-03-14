@@ -27,11 +27,15 @@ def scrape_all():
         "news_title": news_title,
         "news_paragraph": news_paragraph,
         "featured_image": featured(browser),
-        "facts": mars_facts()
+        "facts": mars_facts(),
+        "hemispheres": hemispheres(browser)
     }
 
     # Close browser
     browser.quit()
+
+    # Print to console
+    print("All scraping complete")
 
     # return data as dictionary
     return data
@@ -124,55 +128,50 @@ def mars_facts():
     return mars_df.to_html(classes="table table-striped")
 
 
-# def hemisphere():
-#     return None
+### USGS Astrogeology website ###
+def hemispheres(browser):
 
+    # Url to be scraped for images (USBS Astrogeology)
+    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
 
+    # Direct browser to USGS page
+    browser.visit(url)
 
+    # List of hemispheres
+    hemisphere_urls = browser.find_by_css("a.product-item h3")
 
+    # Empty list to save final pic urls
+    hemisphere_images = []
 
+    # Loop through list of hemispheres
+    for i in range(len(hemisphere_urls)):
+        
+        # Empty dictionary for images
+        hemisphere = {}
+        
+        # Click to get link to larger image
+        browser.find_by_css("a.product-item h3")[i].click()
+        
+        # Get image url and titles for images
+        try:
+            hemisphere_links = browser.links.find_by_text("Sample").first["href"]
+            hemisphere_title = browser.find_by_css("h2.title").text
+            
+            # Save results in dictionary
+            hemisphere["title"] = hemisphere_title
+            hemisphere["link"] = hemisphere_links
+            
+            # Append dictionary values to list
+            hemisphere_images.append(hemisphere)
+            
+            # Go back to prior page
+            browser.back()
 
-# ### USGS Astrogeology website ###
-
-
-# # Url to be scraped for images (USBS Astrogeology)
-
-# url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-
-# # Direct browser to USGS page
-# browser.visit(url)
-
-# # List of hemispheres
-# hemisphere_urls = browser.find_by_css("a.product-item h3")
-
-# # Empty list to save final pic urls
-# hemisphere_images = []
-
-# # Loop through list of hemispheres
-# for i in range(len(hemisphere_urls)):
+        except:
+            print("No data found")
+            return None
     
-#     # Empty dictionary for images
-#     hemisphere = {}
+    # Print to console
+    print("Scraping of USGS Astrogeology complete")
     
-#     # Click to get link to larger image
-#     browser.find_by_css("a.product-item h3")[i].click()
-    
-#     # Get image url and titles for images
-#     hemisphere_links = browser.links.find_by_text("Sample").first["href"]
-#     hemisphere_title = browser.find_by_css("h2.title").text
-    
-#     # Save results in dictionary
-#     hemisphere["title"] = hemisphere_title
-#     hemisphere["link"] = hemisphere_links
-    
-#     # Append dictionary values to list
-#     hemisphere_images.append(hemisphere)
-    
-#     # Go back to prior page
-#     browser.back()
-
-# # Print results to console
-# # Print to console
-# print("Scraping of USGS Astrogeology complete")
-
-
+    return hemisphere_images
