@@ -1,5 +1,7 @@
 # mars-web-scraping
 
+Web scraping of data about Mars with app
+
 ## Getting Started
 
 This project will scrape 4 websites for data and images about Mars and use the resulting information in an app
