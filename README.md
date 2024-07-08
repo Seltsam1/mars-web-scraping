@@ -4,6 +4,8 @@ Web scraping of data about Mars with app
 
 ## Getting Started
 
+![Example of Mars App](https://github.com/Seltsam1/mars-web-scraping/blob/main/web-scraping/examples/example_full.png)
+
 This project will scrape 4 websites for data and images about Mars and use the resulting information in an app
 
 - Websites scraped:
@@ -62,9 +64,6 @@ This project will scrape 4 websites for data and images about Mars and use the r
 - example_full.png, example_bottom_half.png, example_top_half.png
   - Located in the examples folder
   - Pics to show the final rendered version (below is the "example_full")
-
-
-![Example of Mars App](https://github.com/Seltsam1/mars-web-scraping/blob/main/web-scraping/examples/example_full.png)
 
 ## Licensing by:
 
